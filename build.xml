@@ -17,7 +17,21 @@
 		<mkdir dir="${basedir}/build/logs" />
 		<mkdir dir="${basedir}/build/pdepend" />
 	</target>
-
+	 	
+	<target name="api" description="Run api generation" >
+		<exec executable="phpuml" failonerror="true">
+			
+			<arg value="-f" />
+			<arg value="html" />
+			
+			<arg value="-o" />
+			<arg path="${basedir}/build/api" />
+			
+			<arg path="${source}/" />
+			
+		</exec>
+	</target>
+	
 	<target name="tests" description="Run unit tests using PHPUnit" >
 		<exec executable="phpunit" failonerror="true">
 
@@ -33,6 +47,6 @@
 		</exec>
 	</target>
 
-	<target name="build" depends="clean,tests" />
+	<target name="build" depends="clean,api,tests" />
 
 </project>
