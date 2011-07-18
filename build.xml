@@ -18,6 +18,17 @@
 		<mkdir dir="${basedir}/build/pdepend" />
 	</target>
 	 	
+	
+	
+	<target name="checkstyle"
+	         description="Generate checkstyle.xml using PHP_CodeSniffer">
+	  <exec executable="phpcs" output="${basedir}/build/logs/checkstyle.log">
+	   <arg value="--report=checkstyle" />
+	   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+	   <arg value="--standard=PEAR" />
+	   <arg path="${source}" />
+	  </exec>
+	 </target>
 	<target name="api" description="Run api generation" >
 		<exec executable="phpuml" failonerror="true">
 			
@@ -58,6 +69,6 @@
 		</exec>
 	</target>
 
-	<target name="build" depends="clean,api,tests" />
+	<target name="build" depends="clean,api,checkstyle,tests" />
 
 </project>
