@@ -1,8 +1,9 @@
-<?php 
+<?php
 class BasicTest extends PHPUnit_Framework_TestCase
 {
-    public function testFailure()
-    {
-        $this->assertContains(4, array(1, 2, 3));
-    }
+	public function testNewObject()
+	{
+		$obj = new \goetas\xml\XMLDom();
+		$this->assertType(PHPUnit_Framework_Constraint_IsType::TYPE_OBJECT, $obj);
+	}
 }
