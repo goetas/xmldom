@@ -9,7 +9,7 @@ class BasicTest extends PHPUnit_Framework_TestCase
 	public function testNewLoadFile()
 	{
 		$obj = new \goetas\xml\XMLDom();
-		$result = $obj->loadXMLStrict("xml/ho_ns.xml");
+		$result = $obj->loadXMLStrict("xml/no_ns.xml");
 		$this->assertTrue($result);
 	}
 }
