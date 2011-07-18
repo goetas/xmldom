@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="xmldom" default="build" basedir=".">
 
-	<property name="source" value="../src" />
-	<property name="testdir" value="../tests" />
+	<property name="source" value="src" />
+	<property name="testdir" value="tests" />
 
 	<target name="clean" description="Clean up and create artifact directories">
 		<delete dir="${basedir}/build/api" />
