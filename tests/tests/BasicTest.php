@@ -6,4 +6,10 @@ class BasicTest extends PHPUnit_Framework_TestCase
 		$obj = new \goetas\xml\XMLDom();
 		$this->assertType(PHPUnit_Framework_Constraint_IsType::TYPE_OBJECT, $obj);
 	}
+	public function testNewLoadFile()
+	{
+		$obj = new \goetas\xml\XMLDom();
+		$result = $obj->loadXMLStrict("xml/ho_ns.xml");
+		$this->assertTrue($result);
+	}
 }
