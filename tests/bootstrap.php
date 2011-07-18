@@ -1,2 +1,2 @@
 <?php 
-require 'src/autoload.php';
+require '../src/autoload.php';
