@@ -18,18 +18,21 @@
 		<mkdir dir="${basedir}/build/pdepend" />
 	</target>
 
-	<target name="phpunit" description="Run unit tests using PHPUnit">
+	<target name="tests" description="Run unit tests using PHPUnit" >
 		<exec executable="phpunit" failonerror="true">
 
-			<arg value="-c" />
+			<arg value="--configuration" />
 			<arg path="${testdir}/phpunit.xml" />
 
 			<arg value="--log-junit" />
 			<arg path="${basedir}/build/logs/junit.xml" />
+			
+			<arg value="--bootstrap" />
+			<arg path="${basedir}/tests/bootstrap.php" />
 
 		</exec>
 	</target>
 
-	<target name="build" depends="clean,phpunit" />
+	<target name="build" depends="clean,tests" />
 
 </project>

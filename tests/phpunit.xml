@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit bootstrap="bootstrap.php" strict="true" verbose="true">
+<phpunit strict="true" verbose="true">
 	<testsuites>
 		<testsuite name="XMLDom Test Suite">
 			<directory>tests</directory>
