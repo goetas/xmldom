@@ -28,6 +28,19 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 		libxml_use_internal_errors( false );
 		return $res;
 	}
+	public function loadXMLStrictFile($fileName) {
+		
+		libxml_use_internal_errors( true );
+		$res = $this->load ( $fileName );
+		if(! $res ){
+			$errors = libxml_get_errors();
+			libxml_clear_errors();
+			libxml_use_internal_errors( false );
+			throw new \DOMException( "Errore caricamento file $fileName.\n" .self::libxml2string($errors));
+		}
+		libxml_use_internal_errors( false );
+		return $res;
+	}
 	/**
 	 * @return XMLDom
 	 */
