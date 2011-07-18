@@ -32,8 +32,4 @@
 
 	<target name="build" depends="clean,phpunit" />
 
-
-	<logging>
-		<log type="junit" target="${basedir}/build/logs/junit.xml" logIncompleteSkipped="false" />
-	</logging>
 </project>
