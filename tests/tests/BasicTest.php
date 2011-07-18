@@ -12,4 +12,10 @@ class BasicTest extends PHPUnit_Framework_TestCase
 		$result = $obj->loadXMLStrictFile(__DIR__."/xml/no_ns.xml");
 		$this->assertTrue($result);
 	}
+	public function testNewObjectContains()
+	{
+		$obj = new \goetas\xml\XMLDom();
+		$obj->addChild("goetas");
+		$this->assertContains("goetas", $obj->saveXML());
+	}
 }
