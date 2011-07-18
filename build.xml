@@ -27,6 +27,17 @@
 			<arg value="-o" />
 			<arg path="${basedir}/build/api" />
 			
+			
+			<arg value="--no-deployment-view" />
+			<arg value="--no-component-view" />
+			<arg value="--no-dollar" />
+			<arg value="-n" />
+			<arg value="${ant.project.name}" />
+			
+			<arg value="-i" />
+			<arg value=".svn" />
+				
+			
 			<arg path="${source}/" />
 			
 		</exec>
