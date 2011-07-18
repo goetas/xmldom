@@ -25,7 +25,7 @@
 	  <exec executable="phpcs" output="${basedir}/build/logs/checkstyle.log">
 	   <arg value="--report=checkstyle" />
 	   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-	   <arg value="--standard=PEAR" />
+	   <arg value="--standard=${basedir}/coding/standard.xml" />
 	   <arg path="${source}" />
 	  </exec>
 	 </target>
