@@ -2,6 +2,7 @@
 <project name="xmldom" default="build" basedir=".">
 
 	<property name="source" value="../src" />
+	<property name="testdir" value="../tests/tests" />
 
 	<target name="clean" description="Clean up and create artifact directories">
 		<delete dir="${basedir}/build/api" />
@@ -18,7 +19,10 @@
 	</target>
 
 	<target name="phpunit" description="Run unit tests using PHPUnit">
-		<exec executable="phpunit" failonerror="true" />
+		<exec executable="phpunit" failonerror="true" >
+			<arg value="-c" />
+			<arg path="${testdir}/phpunit.xml" />
+		</exec>
 	</target>
 
 	<target name="build" depends="clean,phpunit" />
