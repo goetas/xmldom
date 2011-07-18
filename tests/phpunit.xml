@@ -2,15 +2,9 @@
 
 <phpunit bootstrap="bootstrap.php" strict="true" verbose="true">
 	<testsuites>
-		<testsuite name="ProxyObject Test Suite">
-			<directory>Tests</directory>
+		<testsuite name="XMLDom Test Suite">
+			<directory>tests</directory>
 		</testsuite>
 	</testsuites>
-
-	<filter>
-		<whitelist>
-			<directory>src/lapistano/ProxyObject</directory>
-		</whitelist>
-	</filter>
 </phpunit>
 
