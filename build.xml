@@ -19,7 +19,6 @@
 	</target>
 	 	
 	
-	
 	<target name="checkstyle"
 	         description="Generate checkstyle.xml using PHP_CodeSniffer">
 	  <exec executable="phpcs" output="${basedir}/build/logs/checkstyle.log">
