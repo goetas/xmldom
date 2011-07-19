@@ -29,7 +29,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 		return $res;
 	}
 	public function loadXMLStrictFile($fileName) {
-		
+
 		libxml_use_internal_errors( true );
 		$res = $this->load ( $fileName );
 		if(! $res ){
@@ -98,7 +98,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 	/**
 	 * @return XMLDomElement
 	 */
-	public function addChild($name, $value = NULL,$cdata=0) {
+	public function addChild($name, $value = null,$cdata=0) {
 		if(! isset( $value ) || is_scalar( $value ) || is_null( $value )){
 			if($cdata && $value!==null){
 				$c=$this->createElement($name);
@@ -145,7 +145,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 		return $xp->evaluate( $xpath );
 	}
 	public function singleQuery($xpath, array $ns = array()) {
-		$list = $this->evaluate( $xpath ,$ns);
+		$list = $this->evaluate( $xpath, $ns );
 		if($list instanceof \DOMNodeList){
 			return $list->length > 0?$list->item( 0 )->nodeValue:null;
 		}elseif($list instanceof \DOMNode){
@@ -202,7 +202,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 	/**
 	 * @return XMLDomElement
 	 */
-	public function addChildNS($ns, $name, $value = NULL) {
+	public function addChildNS($ns, $name, $value = null) {
 		if(! isset( $value ) || is_scalar( $value ) || is_null( $value )){
 			$c = $this->createElementNS( $ns, $name, $value );
 		}elseif($value instanceof \DOMElement){
@@ -238,7 +238,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 				}
 			}
 			$tot = $nodo->childNodes->length;
-			
+				
 			for ($k = 0; $k < $nodo->childNodes->length; $k++){
 				$d = $this->importNode( $nodo->childNodes->item($k)->cloneNode(true), true );
 				$new_nodo->appendChild($d);

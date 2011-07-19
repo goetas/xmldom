@@ -7,7 +7,7 @@ class XPath extends \DOMXPath{
 		parent::__construct($dom);
 		$this->registerNamespaces($ns);
 	}
-	public function singleQuery($xpath, array $ns=array(), $ctx=NULL){
+	public function singleQuery($xpath, array $ns=array(), $ctx=null){
 		foreach ($ns as $prefix=>$uri){
 			$this->registerNamespace($prefix,$uri);
 		}
@@ -19,7 +19,7 @@ class XPath extends \DOMXPath{
 		if($list->length>0){
 			return $list->item(0)->nodeValue;
 		}
-		return NULL;
+		return null;
 	}
 	public static function simpleXPath($xpath, \DOMDocument $dom, array $ns=array()){
 		$xp=new self($dom);

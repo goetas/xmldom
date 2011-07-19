@@ -78,7 +78,7 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 	/**
 	 * @return XMLDomElement
 	 */
-	public function addChild($name, $value=NULL, $cdata=0){
+	public function addChild($name, $value=null, $cdata=0){
 		if (!isset($value) || is_scalar($value) || is_null($value)){
 			if($cdata && $value!==null){
 				$c=$this->ownerDocument->createElement($name);
@@ -133,7 +133,7 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 		if($list->length>0){
 			return $list->item(0)->nodeValue;
 		}
-		return NULL;
+		return null;
 	}
 	public function evaluate($xpath, array $ns=array()){
 		if(!(self::$xp instanceof \DOMXPath) || self::$xp->document!==$this->ownerDocument){
