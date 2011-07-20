@@ -1,5 +1,4 @@
 <?php
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 class BasicTest extends PHPUnit_Framework_TestCase{
 	public function testNewObject(){
 		$obj = new \goetas\xml\XMLDom();
