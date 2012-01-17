@@ -76,7 +76,7 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 		return $namespaces;
 	}
 	/**
-	 * @return XMLDomElement
+	 * @return \goetas\xml\XMLDomElement
 	 */
 	public function addChild($name, $value=null, $cdata=0){
 		if (!isset($value) || is_scalar($value) || is_null($value)){
