@@ -80,13 +80,11 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 	 */
 	public function addChild($name, $value=null, $cdata=0){
 		if (!isset($value) || is_scalar($value) || is_null($value)){
+			$c=$this->ownerDocument->createElement($name);
 			if($cdata && $value!==null){
-				$c=$this->ownerDocument->createElement($name);
 				$c->addCdataChild($value);
 			}elseif($value!==null){
-				$c=$this->ownerDocument->createElement($name, $value);
-			}else{
-				$c=$this->ownerDocument->createElement($name);
+				$c->addTextChild($value);
 			}
 		}elseif($value instanceof \DOMElement){
 			$c=$this->ownerDocument->createElement($name);
