@@ -203,15 +203,17 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 	 * @return XMLDomElement
 	 */
 	public function addChildNS($ns, $name, $value = null) {
-		if(! isset( $value ) || is_scalar( $value ) || is_null( $value )){
-			$c = $this->createElementNS( $ns, $name, $value );
+		$c=$this->createElementNS($ns, $name);
+		if ($value===null){
+
 		}elseif($value instanceof \DOMElement){
-			$c = $this->createElementNS( $ns, $name );
-			$c->appendChild( $value );
-		}else{
-			throw new \DOMException( 'unsppoorted type: ' . get_class( $value ) );
+			$c->appendChild($value);
+		}elseif (is_scalar($value)){
+			$c->appendChild($this->ownerDocument->createTextNode($value));
+		}elseif (!is_null($value)){
+			throw new \DOMException('unsupported type: '. (is_object($value)?get_class($value):gettype($value)) );
 		}
-		$this->appendChild( $c );
+		$this->appendChild($c);
 		return $c;
 	}
 	public function serialize() {

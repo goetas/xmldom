@@ -150,14 +150,14 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 
 	public function addChildNS($ns, $name, $value=null){
 		$c=$this->ownerDocument->createElementNS($ns, $name);		
-		if ($value==null){
+		if ($value===null){
 	
 		}elseif($value instanceof \DOMElement){
 			$c->appendChild($value);
 		}elseif (is_scalar($value)){
 			$c->appendChild($this->ownerDocument->createTextNode($value));
 		}elseif (!is_null($value)){
-			throw new \DOMException('unsppoorted type: '. (is_object($value)?get_class($value):gettype($value)) );
+			throw new \DOMException('unsupported type: '. (is_object($value)?get_class($value):gettype($value)) );
 		}
 		$this->appendChild($c);
 		return $c;
