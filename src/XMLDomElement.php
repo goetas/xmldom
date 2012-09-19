@@ -213,7 +213,7 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 		}elseif($domable instanceof XMLAble){
 			$d = $domable->toDOM();
 		}else{
-			throw new \InvalidArgumentException("Arg 1 passato a".__METHOD__." deve essere \DOMDocument o ".__NAMESPACE__."\XMLAble");
+			throw new \InvalidArgumentException("Arg 1 passato a".__METHOD__." deve essere \\DOMDocument o ".__NAMESPACE__."\\XMLAble");
 		}
 
 		$xpath = new \DOMXpath($d);
