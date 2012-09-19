@@ -147,7 +147,23 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 			$this->removeChild($this->firstChild);
 		}
 	}
-
+	public function getPrefixFor($ns) {
+		$prefix = $this->lookupPrefix($ns);
+		if(!$prefix){
+			$prefix = $this->ownerDocument->getPrefixFor($ns);
+		}
+		return $prefix;
+	}
+	public function addPrefixedChild($ns, $name, $prefix = null, $value=null) {
+		return $this->addChildNS($ns, ($prefix?:$this->getPrefixFor($ns)).":".$name, $value);
+	}
+	/**
+	 * @param string $ns
+	 * @param string $name
+	 * @param mixed $value
+	 * @throws \DOMException
+	 * @return \goetas\xml\XMLDomElement
+	 */
 	public function addChildNS($ns, $name, $value=null){
 		$c=$this->ownerDocument->createElementNS($ns, $name);		
 		if ($value===null){

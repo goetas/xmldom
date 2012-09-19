@@ -13,6 +13,22 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 
 		return static::loadXMLString($dom->saveXML());
 	}
+	protected $prefixes = array();
+	public function getPrefixFor($ns) {
+		if(!isset($this->prefixes[$ns])){
+			$part = trim($ns,"/");
+			$part = strtolower(substr($part, strrpos($part, "/")+1,3));
+			if(strlen($part) && !in_array($part, $this->prefixes) && $part!=='xml'){
+				$this->prefixes[$ns] = $part;
+			}else{
+				$this->prefixes[$ns] = "ns".count($this->prefixes[$ns]);
+			}
+			if ($this->documentElement){
+				$this->documentElement->setAttribute("xmlns:".$this->prefixes[$ns], $ns);
+			}
+		}
+		return $this->prefixes[$ns];
+	}
 	public function loadXMLStrict($string) {
 		if(strlen(trim($string))==0){
 			throw new \DOMException( "Errore caricamento stringa XML, stringa vuota.");
@@ -96,7 +112,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 		$this->appendChild( $cdata );
 	}
 	/**
-	 * @return XMLDomElement
+	 * @return \goetas\xml\XMLDomElement
 	 */
 	public function addChild($name, $value = null,$cdata=0) {
 		if(! isset( $value ) || is_scalar( $value ) || is_null( $value )){
