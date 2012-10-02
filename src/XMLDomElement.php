@@ -165,9 +165,9 @@ class XMLDomElement extends \DOMElement implements XMLAble{
 	 * @return \goetas\xml\XMLDomElement
 	 */
 	public function addChildNS($ns, $name, $value=null){
-		$c=$this->ownerDocument->createElementNS($ns, $name);		
+		$c=$this->ownerDocument->createElementNS($ns, $name);
 		if ($value===null){
-	
+
 		}elseif($value instanceof \DOMElement){
 			$c->appendChild($value);
 		}elseif (is_scalar($value)){

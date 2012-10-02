@@ -21,7 +21,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 			if(strlen($part) && !in_array($part, $this->prefixes) && $part!=='xml'){
 				$this->prefixes[$ns] = $part;
 			}else{
-				$this->prefixes[$ns] = "ns".count($this->prefixes[$ns]);
+				$this->prefixes[$ns] = "ns".count($this->prefixes);
 			}
 			if ($this->documentElement){
 				$this->documentElement->setAttribute("xmlns:".$this->prefixes[$ns], $ns);
@@ -256,7 +256,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 				}
 			}
 			$tot = $nodo->childNodes->length;
-				
+
 			for ($k = 0; $k < $nodo->childNodes->length; $k++){
 				$d = $this->importNode( $nodo->childNodes->item($k)->cloneNode(true), true );
 				$new_nodo->appendChild($d);
