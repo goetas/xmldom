@@ -6,12 +6,22 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 		parent::__construct( $version, $enc );
 		$this->registerNodeClass( '\DOMElement', __NAMESPACE__.'\XMLDomElement' );
 	}
+	public function insertAfter($new, $ref){
+		if($ref->nextSibling){
+			$this->insertBefore($new,$ref->nextSibling);
+		}else{
+			$this->appendChild($new);
+		}
+	}
 	/**
 	 * @return XMLDom
 	 */
 	public static function adapt(\DOMDocument $dom) {
-
-		return static::loadXMLString($dom->saveXML());
+		$new = new self();
+		foreach ($dom->childNodes as $child){
+			$new->appendChild($new->importNode($child, true));
+		}
+		return $new;
 	}
 	protected $prefixes = array();
 	public function getPrefixFor($ns) {
