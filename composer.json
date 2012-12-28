@@ -15,9 +15,7 @@
         "php": ">=5.3.2"
     },
     "autoload": {
-        "files": [
-            "src/autoload.php"
-        ]
+    	"psr-0": { "goetas\\xml": "src/" }
     },
     "minimum-stability": "dev"
 }
