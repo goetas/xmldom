@@ -19,7 +19,9 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 	public static function adapt(\DOMDocument $dom) {
 		$new = new self();
 		foreach ($dom->childNodes as $child){
-			$new->appendChild($new->importNode($child, true));
+			// @todo aggiunto controllo perche restituisce false in alcuni casi..
+			$n = $new->importNode($child, true);
+			if ($n) $new->appendChild($new->importNode($child, true));
 		}
 		return $new;
 	}
