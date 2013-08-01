@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="XMLDom Test Suite" tests="8" assertions="12" failures="0" errors="0" time="0.003200">
+    <testsuite name="BasicTest" file="/home/goetas/gits/xmldom/tests/BasicTest.php" tests="6" assertions="8" failures="0" errors="0" time="0.001718">
+      <testcase name="testNewObject" class="BasicTest" file="/home/goetas/gits/xmldom/tests/BasicTest.php" line="3" assertions="1" time="0.001172"/>
+      <testcase name="testNewLoadFile" class="BasicTest" file="/home/goetas/gits/xmldom/tests/BasicTest.php" line="7" assertions="1" time="0.000119"/>
+      <testcase name="testAddChilds" class="BasicTest" file="/home/goetas/gits/xmldom/tests/BasicTest.php" line="12" assertions="1" time="0.000129"/>
+      <testcase name="testAppendExternalDocument" class="BasicTest" file="/home/goetas/gits/xmldom/tests/BasicTest.php" line="17" assertions="1" time="0.000123"/>
+      <testcase name="testAppendExternalElement" class="BasicTest" file="/home/goetas/gits/xmldom/tests/BasicTest.php" line="27" assertions="2" time="0.000092"/>
+      <testcase name="testAdapt" class="BasicTest" file="/home/goetas/gits/xmldom/tests/BasicTest.php" line="38" assertions="2" time="0.000083"/>
+    </testsuite>
+    <testsuite name="XPathTest" file="/home/goetas/gits/xmldom/tests/XPathTest.php" tests="2" assertions="4" failures="0" errors="0" time="0.001482">
+      <testcase name="testEvaluateGenericPrefixNs" class="XPathTest" file="/home/goetas/gits/xmldom/tests/XPathTest.php" line="14" assertions="3" time="0.001303"/>
+      <testcase name="testEvaluateNoPrefixNs" class="XPathTest" file="/home/goetas/gits/xmldom/tests/XPathTest.php" line="27" assertions="1" time="0.000179"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

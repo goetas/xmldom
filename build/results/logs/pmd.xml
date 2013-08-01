@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pmd version="@package_version@" timestamp="2013-08-01T11:05:29+02:00">
+  <file name="/home/goetas/gits/xmldom/src/goetas/xml/XMLDom.php">
+    <violation beginline="3" endline="282" rule="ExcessivePublicCount" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivepubliccount" class="XMLDom" priority="3">
+      The class XMLDom has 24 public methods and attributes. Consider to reduce the number of public items under 20.
+    </violation>
+    <violation beginline="3" endline="282" rule="TooManyMethods" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="XMLDom" priority="3">
+      The class XMLDom has 23 methods. Consider refactoring XMLDom to keep number of methods under 20.
+    </violation>
+    <violation beginline="3" endline="282" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="XMLDom" priority="3">
+      The class XMLDom has an overall complexity of 70 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="130" endline="148" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="XMLDom" method="addChild" priority="1">
+      The method addChild() has a Cyclomatic Complexity of 8. The configured cyclomatic complexity threshold is 8.
+    </violation>
+    <violation beginline="271" endline="271" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$tot'.
+    </violation>
+  </file>
+  <file name="/home/goetas/gits/xmldom/src/goetas/xml/XMLDomElement.php">
+    <violation beginline="3" endline="241" rule="ExcessivePublicCount" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivepubliccount" class="XMLDomElement" priority="3">
+      The class XMLDomElement has 24 public methods and attributes. Consider to reduce the number of public items under 20.
+    </violation>
+    <violation beginline="3" endline="241" rule="TooManyMethods" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="XMLDomElement" priority="3">
+      The class XMLDomElement has 21 methods. Consider refactoring XMLDomElement to keep number of methods under 20.
+    </violation>
+    <violation beginline="3" endline="241" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="XMLDomElement" priority="3">
+      The class XMLDomElement has an overall complexity of 70 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="81" endline="97" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="goetas\xml" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="XMLDomElement" method="addChild" priority="1">
+      The method addChild() has a Cyclomatic Complexity of 9. The configured cyclomatic complexity threshold is 8.
+    </violation>
+  </file>
+</pmd>
