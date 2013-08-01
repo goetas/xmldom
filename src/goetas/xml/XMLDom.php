@@ -21,7 +21,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
 		foreach ($dom->childNodes as $child){
 			$n = $new->importNode($child, true);
 			if ($n){
-				$new->appendChild($new->importNode($child, true));
+				$new->appendChild($n);
 			}
 		}
 		return $new;
