@@ -79,9 +79,10 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
     public static function loadXMLString($s) {
         $x = new static ();
         libxml_use_internal_errors ( true );
+        // @codingStandardsIgnoreStart
         if (! @$x->loadXML ( $s )) {
+            // @codingStandardsIgnoreEnd
             $errors = libxml_get_errors ();
-
             libxml_clear_errors ();
             libxml_use_internal_errors ( false );
             throw new \DOMException ( "Errore caricamento stringa '" . (strlen ( $s ) > 30 ? substr ( $s, 0, 27 ) : $s) . "'\n" . self::libxml2string ( $errors ) );
@@ -99,7 +100,9 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
         }
         $x = new static ();
         libxml_use_internal_errors ( true );
+        // @codingStandardsIgnoreStart
         if (! @$x->load ( $file )) {
+             // @codingStandardsIgnoreEnd
             $errors = libxml_get_errors ();
 
             libxml_clear_errors ();
@@ -239,12 +242,12 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
      */
     public function addChildNS($ns, $name, $value = null) {
         $c = $this->createElementNS ( $ns, $name );
-        if ($value === null) {} elseif ($value instanceof \DOMElement) {
+        if ($value instanceof \DOMElement) {
             $c->appendChild ( $value );
         } elseif (is_scalar ( $value )) {
             $c->appendChild ( $this->ownerDocument->createTextNode ( $value ) );
         } elseif (! is_null ( $value )) {
-            throw new \DOMException ( 'unsupported type: ' . (is_object ( $value ) ? get_class ( $value ) : gettype ( $value )) );
+            throw new \DOMException ( 'Unsupported type: ' . (is_object ( $value ) ? get_class ( $value ) : gettype ( $value )) );
         }
         $this->appendChild ( $c );
         return $c;
