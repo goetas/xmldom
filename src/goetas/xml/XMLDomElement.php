@@ -78,7 +78,6 @@ class XMLDomElement extends \DOMElement implements XMLAble {
         return $namespaces;
     }
     /**
-     *
      * @return \goetas\xml\XMLDomElement
      */
     public function addChild($name, $value = null, $cdata = 0) {
@@ -98,6 +97,12 @@ class XMLDomElement extends \DOMElement implements XMLAble {
         $this->appendChild ( $c );
         return $c;
     }
+    /**
+     *
+     * @param string $value
+     * @throws \DOMException
+     * @return \DOMNode
+     */
     public function addComment($value) {
         if (! isset ( $value ) || is_scalar ( $value ) || is_null ( $value )) {
             $c = $this->ownerDocument->createComment ( $value );
@@ -169,7 +174,7 @@ class XMLDomElement extends \DOMElement implements XMLAble {
      */
     public function addChildNS($ns, $name, $value = null) {
         $c = $this->ownerDocument->createElementNS ( $ns, $name );
-        if ($value === null) {} elseif ($value instanceof \DOMElement) {
+        if ($value instanceof \DOMElement) {
             $c->appendChild ( $value );
         } elseif (is_scalar ( $value )) {
             $c->appendChild ( $this->ownerDocument->createTextNode ( $value ) );
