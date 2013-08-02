@@ -24,10 +24,4 @@ class XPathTest extends \PHPUnit_Framework_TestCase{
 		$this->assertEquals(0, $nodes->length);
 
 	}
-	public function testEvaluateNoPrefixNs() {
-		$root = $this->xml->documentElement;
-		// uses http://php.net/manual/en/domxpath.query.php $registerNodeNS = true
-		$nodes = $root->evaluate("//weat:GetWeatherInformation");
-		$this->assertEquals(1, $nodes->length);
-	}
 }

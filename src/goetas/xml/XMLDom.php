@@ -173,17 +173,19 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble {
         foreach ( $ns as $prefix => $uri ) {
             $xp->registerNamespace ( $prefix, $uri );
         }
-        return $xp->query ( $xpath );
+        // https://bugs.php.net/bug.php?id=65375
+        return $xp->query ( $xpath , null, false);
     }
     public function evaluate($xpath, array $ns = array()) {
         $xp = new \DOMXpath ( $this );
         foreach ( $ns as $prefix => $uri ) {
             $xp->registerNamespace ( $prefix, $uri );
         }
-        return $xp->evaluate ( $xpath );
+        // https://bugs.php.net/bug.php?id=65375
+        return $xp->evaluate ( $xpath , null, false);
     }
     public function singleQuery($xpath, array $ns = array()) {
-        $list = $this->evaluate ( $xpath, $ns );
+        $list = $this->evaluate ( $xpath, $ns, false );
         if ($list instanceof \DOMNodeList) {
             return $list->length > 0 ? $list->item ( 0 )->nodeValue : null;
         } elseif ($list instanceof \DOMNode) {

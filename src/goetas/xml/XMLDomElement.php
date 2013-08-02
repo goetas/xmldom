@@ -122,7 +122,8 @@ class XMLDomElement extends \DOMElement implements XMLAble {
         foreach ( $ns as $prefix => $uri ) {
             self::$xp->registerNamespace ( $prefix, $uri );
         }
-        return self::$xp->query ( $xpath, $this );
+        // https://bugs.php.net/bug.php?id=65375
+        return self::$xp->query ( $xpath, $this , false);
     }
     public function xpath($xpath, array $ns = array()) {
         return $this->query ( $xpath, $ns );
@@ -134,7 +135,8 @@ class XMLDomElement extends \DOMElement implements XMLAble {
         foreach ( $ns as $prefix => $uri ) {
             self::$xp->registerNamespace ( $prefix, $uri );
         }
-        $list = self::$xp->evaluate ( $xpath, $this );
+         // https://bugs.php.net/bug.php?id=65375
+        $list = self::$xp->evaluate ( $xpath, $this, false );
         if ($list->length > 0) {
             return $list->item ( 0 )->nodeValue;
         }
@@ -147,7 +149,8 @@ class XMLDomElement extends \DOMElement implements XMLAble {
         foreach ( $ns as $prefix => $uri ) {
             self::$xp->registerNamespace ( $prefix, $uri );
         }
-        return self::$xp->evaluate ( $xpath, $this );
+         // https://bugs.php.net/bug.php?id=65375
+        return self::$xp->evaluate ( $xpath, $this, false );
     }
     public function removeChilds() {
         while ( $this->hasChildNodes () ) {
