@@ -2,19 +2,23 @@
 
 namespace goetas\xml;
 
-class XMLDomElement extends \DOMElement implements XMLAble {
+class XMLDomElement extends \DOMElement implements XMLAble
+{
     private static $xp;
-    public function appendExternalElement(\DOMNode $e, $deep = true) {
+    public function appendExternalElement(\DOMNode $e, $deep = true)
+    {
         return $this->appendChild ( $this->ownerDocument->importNode ( $e, $deep ) );
     }
-    public function prependChild($new) {
+    public function prependChild($new)
+    {
         if ($this->firstChild) {
             $this->insertBefore ( $new, $this->firstChild );
         } else {
             $this->appendChild ( $new );
         }
     }
-    public function insertAfter($new, $ref) {
+    public function insertAfter($new, $ref)
+    {
         if ($ref->nextSibling) {
             $this->insertBefore ( $new, $ref->nextSibling );
         } else {
@@ -26,45 +30,51 @@ class XMLDomElement extends \DOMElement implements XMLAble {
      * @var XSLTProcessor
      */
     private static $xsl;
-    public function saveXML($me = true) {
+    public function saveXML($me = true)
+    {
         $xml = new XMLDom ();
 
         if (! (self::$xsl instanceof \XSLTProcessor)) {
             self::$xsl = new \XSLTProcessor ();
             self::$xsl->importStylesheet ( XMLDom::loadXMLString ( '<?xml version="1.0" encoding="utf-8"?>
-				<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-				<xsl:output omit-xml-declaration="yes" method="xml"/>
-				<xsl:template match="node()|@*" priority="-4">
-					<xsl:copy>
-						<xsl:apply-templates  select="@*"/>
-						<xsl:apply-templates />
-					</xsl:copy>
-				</xsl:template>
-				<xsl:template match="/" priority="-4">
-					<xsl:apply-templates />
-				</xsl:template>
-			</xsl:stylesheet>' ) );
+                <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:output omit-xml-declaration="yes" method="xml"/>
+                <xsl:template match="node()|@*" priority="-4">
+                    <xsl:copy>
+                        <xsl:apply-templates  select="@*"/>
+                        <xsl:apply-templates />
+                    </xsl:copy>
+                </xsl:template>
+                <xsl:template match="/" priority="-4">
+                    <xsl:apply-templates />
+                </xsl:template>
+            </xsl:stylesheet>' ) );
         }
         if ($me) {
             $xml->appendChild ( $xml->importNode ( $this, true ) );
+
             return self::$xsl->transformToXml ( $xml );
         } else {
-            foreach ( $this->childNodes as $node ) {
+            foreach ($this->childNodes as $node) {
                 $xml->appendChild ( $xml->importNode ( $node, true ) );
             }
         }
+
         return self::$xsl->transformToXml ( $xml );
     }
-    public function toDOM() {
+    public function toDOM()
+    {
         $xml = new XMLDom ();
         $xml->appendChild ( $xml->importNode ( $this, true ) );
+
         return $xml;
     }
-    public function allNamespaces() {
+    public function allNamespaces()
+    {
         $namespaces = array ();
 
         $namespaces [$this->namespaceURI] = $this->namespaceURI;
-        foreach ( $this->attributes as $attribute ) {
+        foreach ($this->attributes as $attribute) {
             $namespaces [$attribute->namespaceURI] = $attribute->namespaceURI;
         }
         if ($this->parentNode->nodeType ==\XML_ELEMENT_NODE && $this->parentNode instanceof XMLDomElement) {
@@ -80,7 +90,8 @@ class XMLDomElement extends \DOMElement implements XMLAble {
     /**
      * @return \goetas\xml\XMLDomElement
      */
-    public function addChild($name, $value = null, $cdata = 0) {
+    public function addChild($name, $value = null, $cdata = 0)
+    {
         if (! isset ( $value ) || is_scalar ( $value ) || is_null ( $value )) {
             $c = $this->ownerDocument->createElement ( $name );
             if ($cdata && $value !== null) {
@@ -95,44 +106,51 @@ class XMLDomElement extends \DOMElement implements XMLAble {
             throw new \DOMException ( 'unsppoorted type: ' . (is_object ( $value ) ? get_class ( $value ) : gettype ( $value )) );
         }
         $this->appendChild ( $c );
+
         return $c;
     }
     /**
      *
-     * @param string $value
+     * @param  string        $value
      * @throws \DOMException
      * @return \DOMNode
      */
-    public function addComment($value) {
+    public function addComment($value)
+    {
         if (! isset ( $value ) || is_scalar ( $value ) || is_null ( $value )) {
             $c = $this->ownerDocument->createComment ( $value );
         } else {
             throw new \DOMException ( 'unsppoorted type: ' . (is_object ( $value ) ? get_class ( $value ) : gettype ( $value )) );
         }
         $this->appendChild ( $c );
+
         return $c;
     }
-    public function __toString() {
+    public function __toString()
+    {
         return $this->nodeValue;
     }
-    public function query($xpath, array $ns = array()) {
+    public function query($xpath, array $ns = array())
+    {
         if (! (self::$xp instanceof \DOMXPath) || self::$xp->document !== $this->ownerDocument) {
             self::$xp = new \DOMXpath ( $this->ownerDocument );
         }
-        foreach ( $ns as $prefix => $uri ) {
+        foreach ($ns as $prefix => $uri) {
             self::$xp->registerNamespace ( $prefix, $uri );
         }
         // https://bugs.php.net/bug.php?id=65375
         return self::$xp->query ( $xpath, $this , false);
     }
-    public function xpath($xpath, array $ns = array()) {
+    public function xpath($xpath, array $ns = array())
+    {
         return $this->query ( $xpath, $ns );
     }
-    public function singleQuery($xpath, array $ns = array()) {
+    public function singleQuery($xpath, array $ns = array())
+    {
         if (! (self::$xp instanceof \DOMXPath) || self::$xp->document !== $this->ownerDocument) {
             self::$xp = new \DOMXpath ( $this->ownerDocument );
         }
-        foreach ( $ns as $prefix => $uri ) {
+        foreach ($ns as $prefix => $uri) {
             self::$xp->registerNamespace ( $prefix, $uri );
         }
          // https://bugs.php.net/bug.php?id=65375
@@ -140,42 +158,49 @@ class XMLDomElement extends \DOMElement implements XMLAble {
         if ($list->length > 0) {
             return $list->item ( 0 )->nodeValue;
         }
+
         return null;
     }
-    public function evaluate($xpath, array $ns = array()) {
+    public function evaluate($xpath, array $ns = array())
+    {
         if (! (self::$xp instanceof \DOMXPath) || self::$xp->document !== $this->ownerDocument) {
             self::$xp = new \DOMXpath ( $this->ownerDocument );
         }
-        foreach ( $ns as $prefix => $uri ) {
+        foreach ($ns as $prefix => $uri) {
             self::$xp->registerNamespace ( $prefix, $uri );
         }
          // https://bugs.php.net/bug.php?id=65375
         return self::$xp->evaluate ( $xpath, $this, false );
     }
-    public function removeChilds() {
+    public function removeChilds()
+    {
         while ( $this->hasChildNodes () ) {
             $this->removeChild ( $this->firstChild );
         }
     }
-    public function getPrefixFor($ns) {
+    public function getPrefixFor($ns)
+    {
         $prefix = $this->lookupPrefix ( $ns );
         if (! $prefix) {
             $prefix = $this->ownerDocument->getPrefixFor ( $ns );
         }
+
         return $prefix;
     }
-    public function addPrefixedChild($ns, $name, $prefix = null, $value = null) {
+    public function addPrefixedChild($ns, $name, $prefix = null, $value = null)
+    {
         return $this->addChildNS ( $ns, ($prefix ?  : $this->getPrefixFor ( $ns )) . ":" . $name, $value );
     }
     /**
      *
-     * @param string $ns
-     * @param string $name
-     * @param mixed $value
+     * @param  string                    $ns
+     * @param  string                    $name
+     * @param  mixed                     $value
      * @throws \DOMException
      * @return \goetas\xml\XMLDomElement
      */
-    public function addChildNS($ns, $name, $value = null) {
+    public function addChildNS($ns, $name, $value = null)
+    {
         $c = $this->ownerDocument->createElementNS ( $ns, $name );
         if ($value instanceof \DOMElement) {
             $c->appendChild ( $value );
@@ -185,13 +210,16 @@ class XMLDomElement extends \DOMElement implements XMLAble {
             throw new \DOMException ( ' type: ' . (is_object ( $value ) ? get_class ( $value ) : gettype ( $value )) );
         }
         $this->appendChild ( $c );
+
         return $c;
     }
-    public function addCdataChild($value) {
+    public function addCdataChild($value)
+    {
         $cdata = $this->ownerDocument->createCDATASection ( $value );
         $this->appendChild ( $cdata );
     }
-    public function addTextChild($value) {
+    public function addTextChild($value)
+    {
         $cdata = $this->ownerDocument->createTextNode ( $value );
         $this->appendChild ( $cdata );
     }
@@ -199,14 +227,16 @@ class XMLDomElement extends \DOMElement implements XMLAble {
      *
      * @return XMLDomElement
      */
-    public function remove() {
+    public function remove()
+    {
         return $this->parentNode->removeChild ( $this );
     }
     /**
      *
      * @return XMLDomElement
      */
-    public function replaceMe(\DOMElement $new) {
+    public function replaceMe(\DOMElement $new)
+    {
         if ($this->ownerDocument === null && ! $this->parentNode) {
             return null;
         } elseif ($this->isSameNode ( $this->ownerDocument->documentElement )) {
@@ -219,7 +249,8 @@ class XMLDomElement extends \DOMElement implements XMLAble {
      *
      * @return XMLDomElement
      */
-    public function appendExternalDocument($domable, $deep = true) {
+    public function appendExternalDocument($domable, $deep = true)
+    {
         if ($domable instanceof \DOMDocument) {
             $d = $domable;
         } elseif ($domable instanceof XMLAble) {
@@ -230,27 +261,31 @@ class XMLDomElement extends \DOMElement implements XMLAble {
 
         $xpath = new \DOMXpath ( $d );
         $nodeList = $xpath->query ( "/*" );
-        foreach ( $nodeList as $node ) {
+        foreach ($nodeList as $node) {
             $newNode = $this->ownerDocument->importNode ( $node, $deep );
             $last = $this->appendChild ( $newNode );
         }
+
         return $last;
     }
     /**
      *
      * @return XMLDomElement
      */
-    public function setAttr($name, $val) {
+    public function setAttr($name, $val)
+    {
         $this->setAttribute ( $name, $val );
+
         return $this;
     }
     /**
      *
      * @return XMLDomElement
      */
-    public function setAttrNS($ns, $name, $val) {
+    public function setAttrNS($ns, $name, $val)
+    {
         $this->setAttributeNS ( $ns, $name, $val );
+
         return $this;
     }
 }
-?>

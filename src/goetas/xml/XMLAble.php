@@ -1,10 +1,10 @@
 <?php
 
 namespace goetas\xml;
-interface XMLAble{
-	/** ritorna la rappresentazione DOM
-	@return DOMDocument
-	*/
-	function toDOM();
+interface XMLAble
+{
+    /** ritorna la rappresentazione DOM
+    @return DOMDocument
+    */
+    public function toDOM();
 }
-?>

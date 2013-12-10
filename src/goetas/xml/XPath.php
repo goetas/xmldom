@@ -2,15 +2,18 @@
 
 namespace goetas\xml;
 
-class XPath extends \DOMXPath {
+class XPath extends \DOMXPath
+{
     protected $dom;
-    public function __construct(\DOMDocument $dom, $ns = array()) {
+    public function __construct(\DOMDocument $dom, $ns = array())
+    {
         $this->dom = $dom;
         parent::__construct ( $dom );
         $this->registerNamespaces ( $ns );
     }
-    public function singleQuery($xpath, array $ns = array(), $ctx = null) {
-        foreach ( $ns as $prefix => $uri ) {
+    public function singleQuery($xpath, array $ns = array(), $ctx = null)
+    {
+        foreach ($ns as $prefix => $uri) {
             $this->registerNamespace ( $prefix, $uri );
         }
         if ($ctx instanceof \DOMNode) {
@@ -21,25 +24,31 @@ class XPath extends \DOMXPath {
         if ($list->length > 0) {
             return $list->item ( 0 )->nodeValue;
         }
+
         return null;
     }
-    public static function simpleXPath($xpath,\DOMDocument $dom, array $ns = array()) {
+    public static function simpleXPath($xpath,\DOMDocument $dom, array $ns = array())
+    {
         $xp = new self ( $dom );
-        foreach ( $ns as $prefix => $uri ) {
+        foreach ($ns as $prefix => $uri) {
             $xp->registerNamespace ( $prefix, $uri );
         }
+
         return $xp->query ( $xpath );
     }
-    public function registerNamespaces(array $ns) {
-        foreach ( $ns as $prefix => $uri ) {
+    public function registerNamespaces(array $ns)
+    {
+        foreach ($ns as $prefix => $uri) {
             $this->registerNamespace ( $prefix, $uri );
         }
     }
-    public static function simpleEvalXPath($xpath,\DOMDocument $dom, array $ns = array()) {
+    public static function simpleEvalXPath($xpath,\DOMDocument $dom, array $ns = array())
+    {
         $xp = new self ( $dom );
-        foreach ( $ns as $prefix => $uri ) {
+        foreach ($ns as $prefix => $uri) {
             $xp->registerNamespace ( $prefix, $uri );
         }
+
         return $xp->evaluate ( $xpath );
     }
 }
