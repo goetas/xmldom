@@ -85,7 +85,7 @@ class XMLDomElement extends \DOMElement implements XMLAble
             }
         }
 
-        return $namespaces;
+        return array_filter($namespaces);
     }
     /**
      * @return \goetas\xml\XMLDomElement
