@@ -69,7 +69,7 @@ class XMLDomElement extends \DOMElement implements XMLAble
 
         return $xml;
     }
-    public function allNamespaces()
+    public function allNamespaces($prefix = false)
     {
         $namespaces = array ();
 
@@ -83,6 +83,10 @@ class XMLDomElement extends \DOMElement implements XMLAble
                     $namespaces [$ns] = $ns;
                 }
             }
+        }
+
+        if ($prefix) {
+            $namespaces = array_flip(array_filter(array_map(array($this, 'lookupPrefix'), $namespaces)));
         }
 
         return array_filter($namespaces);
