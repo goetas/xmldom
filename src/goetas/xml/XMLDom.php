@@ -269,7 +269,7 @@ class XMLDom extends \DOMDocument implements \Serializable, XMLAble
             }
         }
 
-        return $namespaces;
+        return array_filter($namespaces);
     }
     /**
      *
